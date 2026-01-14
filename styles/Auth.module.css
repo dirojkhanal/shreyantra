@@ -1,0 +1,221 @@
+/* Auth.module.css - Unified & Polished */
+
+.background {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  padding-top: 80px; /* Space for your fixed Navbar */
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: #ffffff;
+}
+
+.leftSide {
+  flex: 1.2;
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Modern decorative element for the background */
+.leftSide::before {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  top: -100px;
+  left: -100px;
+}
+
+.welcomeText {
+  z-index: 1;
+  max-width: 450px;
+}
+
+.welcomeText h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  letter-spacing: -2px;
+}
+
+.welcomeText p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  opacity: 0.85;
+}
+
+.rightSide {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f8fafc; /* Lighter, cleaner background */
+}
+
+.container {
+  width: 100%;
+  max-width: 440px;
+  padding: 3rem 2.5rem;
+  background: white;
+  border-radius: 20px;
+  /* Soft, modern shadow */
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 
+              0 8px 10px -6px rgba(0, 0, 0, 0.05);
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.subtitle {
+  text-align: center;
+  color: #64748b;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* --- Improved Input Fields --- */
+.input {
+  width: 100%;
+  padding: 0.85rem 1.1rem;
+  background-color: #ffffff; /* White background looks cleaner */
+  border: 1px solid #e2e8f0; /* Soft light border */
+  border-radius: 10px;
+  font-size: 1rem;
+  color: #1e293b;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.input::placeholder {
+  color: #94a3b8;
+}
+
+.input:hover {
+  border-color: #cbd5e1;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #4f46e5;
+  background-color: #ffffff;
+  /* Modern ring effect */
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+}
+
+/* --- Password Specifics --- */
+.passwordWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.passwordWrapper .input {
+  padding-right: 3.5rem;
+}
+
+.eyeButton {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  display: flex;
+  padding: 4px;
+  transition: color 0.2s;
+}
+
+.eyeButton:hover {
+  color: #4f46e5;
+}
+
+/* --- OTP Specifics --- */
+.otpInput {
+  text-align: center;
+  letter-spacing: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #4f46e5;
+}
+
+/* --- Button & Links --- */
+.button {
+  width: 100%;
+  background-color: #4f46e5;
+  color: white;
+  padding: 1rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  margin-top: 0.5rem;
+}
+
+.button:hover:not(:disabled) {
+  background-color: #4338ca;
+  transform: translateY(-1px);
+}
+
+.button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.links {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+.links a, .resendBtn {
+  color: #4f46e5;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.links a:hover, .resendBtn:hover {
+  text-decoration: underline;
+}
+
+.resendBtn {
+  background: none;
+  border: none;
+  font-size: 0.9rem;
+  padding: 0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .leftSide { display: none; }
+  .rightSide { padding: 1rem; background: #fff; }
+  .container { box-shadow: none; padding: 1.5rem; }
+  .background { padding-top: 70px; }
+}

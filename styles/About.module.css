@@ -1,0 +1,115 @@
+.aboutMain {
+  min-height: 100vh;
+  background-color: #ffffff;
+  padding-top: 120px;
+  padding-bottom: 60px;
+  font-family: 'Inter', system-ui, sans-serif;
+  color: #1e293b;
+}
+
+.headerSection {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto 4rem;
+  padding: 0 1.5rem;
+}
+
+.title {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  letter-spacing: -1.5px;
+}
+
+.title span {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.lead {
+  font-size: 1.25rem;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+.contentGrid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 3rem;
+  padding: 0 1.5rem;
+  align-items: center;
+}
+
+.textBlock h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #0f172a;
+}
+
+.textBlock p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #4b5563;
+  margin-bottom: 1.5rem;
+}
+
+.geometryCard {
+  background: #f8fafc;
+  padding: 2.5rem;
+  border-radius: 24px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.geometryCard h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1.25rem;
+  color: #4f46e5;
+}
+
+.featureList {
+  list-style: none;
+  padding: 0;
+}
+
+.featureList li {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: #475569;
+  display: flex;
+  flex-direction: column;
+}
+
+.mission {
+  max-width: 800px;
+  margin: 6rem auto 0;
+  text-align: center;
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, #f1f5f9 0%, #ffffff 100%);
+  border-radius: 32px;
+}
+
+.mission h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.mission p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #64748b;
+}
+
+@media (max-width: 768px) {
+  .contentGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .headerSection {
+    margin-bottom: 2rem;
+  }
+}

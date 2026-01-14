@@ -1,0 +1,98 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.navContainer {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.logo a {
+  text-decoration: none;
+  color: #111827;
+}
+
+.logo span {
+  color: #4f46e5;
+}
+
+.links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+/* Shared style for ALL links: Home, About, Login, and Register */
+.links li a, 
+.loginLink, 
+.registerBtn {
+  color: #4b5563;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  padding: 0.5rem 0.2rem;
+}
+
+/* Unified Hover State */
+.links li a:hover, 
+.links li a.active, 
+.loginLink:hover, 
+.registerBtn:hover {
+  color: #4f46e5;
+  background: none; /* Removed button background */
+  transform: none;   /* Removed button lift effect */
+  box-shadow: none;  /* Removed button shadow */
+}
+
+/* Logout remains unique to show it is a destructive/action button */
+.logoutBtn {
+  background: #fee2e2;
+  color: #ef4444;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  font-size: 0.95rem;
+  transition: 0.2s;
+}
+
+.logoutBtn:hover {
+  background: #fecaca;
+}
+
+@media (max-width: 768px) {
+  .navContainer {
+    padding: 0 1rem;
+  }
+  .links {
+    gap: 1rem;
+  }
+  .links li a, .loginLink, .registerBtn {
+    font-size: 0.85rem;
+  }
+}
