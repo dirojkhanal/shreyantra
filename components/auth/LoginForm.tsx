@@ -6,37 +6,26 @@ import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import Navbar from "@/components/auth/Navbar";
 import styles from "@/styles/Auth.module.css";
+import { JSX } from "react";
 
-export default function LoginForm() {
-  const router = useRouter();
-  const [loading, setLoading] = useState(false);
+export default function LoginForm(): JSX.Element {
+    const [loading ,setLoading] = useState(false);
+    const router = useRouter();
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setLoading(true);
-
-    const form = e.currentTarget;
-    const email = (form.elements.namedItem("email") as HTMLInputElement).value;
-    const password = (form.elements.namedItem("password") as HTMLInputElement).value;
-
-    const res = await signIn("credentials", {
-      redirect: false,
-      email,
-      password,
-    });
-
-    if (res?.error) {
-      toast.error("Invalid credentials");
-      setLoading(false);
-      return;
-    }
-
-    toast.success("Login successful");
-    setLoading(false);
-
-    // Use router.push to callbackUrl after login
-    router.replace("/dashboard");
-  };
+    const handleSubmit = async(e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setLoading(true);
+        const form = e.currentTarget;
+        const email = (form.elements.namedItem("email") as HTMLInputElement).value;
+        const password = (form.elements.namedItem("password") as HTMLInputElement).value;
+        const res = await signIn("credentials", { email, password, redirect: false });
+        setLoading(false);
+        if(res?.error){
+            toast.error(res.error);
+        } else {
+            router.push("/dashboard");
+        }
+}
 
   return (
     <>
