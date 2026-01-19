@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/auth/Navbar";
 import styles from "@/styles/Home.module.css";
 import { JSX } from "react";
 export default function Home(): JSX.Element {

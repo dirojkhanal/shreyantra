@@ -1,6 +1,6 @@
 "use client";
 
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/auth/Navbar";
 import styles from "@/styles/About.module.css";
 import { JSX } from "react";
 
