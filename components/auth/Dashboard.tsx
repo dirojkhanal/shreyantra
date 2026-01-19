@@ -1,76 +1,67 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/context/AuthContext";
+import { useSession, signOut } from "next-auth/react";
+import Navbar from "@/components/auth/Navbar";
 import styles from "@/styles/Dashboard.module.css";
 
-export default function Dashboard() {
-  const { auth, logout, loading } = useAuth();
+export default function () {
+  const {data:session , status } = useSession();
   const router = useRouter();
 
-  const [mounted, setMounted] = useState(false);
-
-  // Ensure client-side rendering only
   useEffect(() => {
-    setMounted(true);
-  }, []);
+    if (status ==="authenticated")
+      router.push("/login")
+  }, [session , status]);
 
-  // Redirect if not authenticated
-  useEffect(() => {
-    if (mounted && !loading && !auth) {
-      router.replace("/login");
-    }
-  }, [mounted, loading, auth, router]);
-
-  // LOADER during hydration + auth check
-  if (!mounted || loading) {
+  if (status ==="loading") {
     return (
-      <div className={styles.loaderWrapper}>
-        <div className={styles.loader}></div>
-        <p className={styles.loadingText}>Loading...</p>
+      <div className={styles.dashboard}>
+        <p>Dashboard Loding....</p>
       </div>
     );
   }
+  if(!session?.user) {
+    return null;
+  }
 
-  // Safety fallback
-  if (!auth) return null;
+  const handleLogout = async()=>{
+    await signOut({redirect:false});
+    router.replace("/login");
 
-  const handleLogout = async () => {
-    await logout();
-    router.push("/login");
-  };
+  }
+   // Get first letter of name for the avatar
+  const userInitial = session.user.name ? session.user.name.charAt(0).toUpperCase() : "U";
 
   return (
-    <div className={styles.dashboard}>
-      {/* Background Waves */}
-      <div className={styles.backgroundWaves} />
+    <>
+      <Navbar />
+      <main className={styles.dashboard}>
+        <div className={styles.content}>
+          {/* Avatar Circle */}
+          <div className={styles.avatar}>{userInitial}</div>
 
-      {/* Subtle Shree Yantra Overlay */}
-      <div className={styles.yantraContainer}></div>
+          <h1>Welcome, {session.user.name}</h1>
+          
 
-      <div className={styles.content}>
-        <div className={styles.profileCard}>
-          <h1 className={styles.welcome}>
-            Namaste, {auth.user.name} 
-          </h1>
-
-          <p className={styles.subtitle}>
-            Welcome to Shree Yantra 
-          </p>
-
-          <div className={styles.userInfo}>
-            <p><strong>Email:</strong> {auth.user.email}</p>
-            {auth.user.phone && (
-              <p><strong>Phone:</strong> {auth.user.phone}</p>
-            )}
+          {/* Stats Grid added to match your CSS */}
+          <div className={styles.statsGrid}>
+            <div className={styles.statCard}>
+              <h3>Status</h3>
+              <span>Verified</span>
+            </div>
+            <div className={styles.statCard}>
+              <h3>Email</h3>
+              <p>{session.user.email}</p>
+            </div>
           </div>
 
           <button onClick={handleLogout} className={styles.logoutBtn}>
-            Logout
+            Logout Account
           </button>
         </div>
-      </div>
-    </div>
+      </main>
+    </>
   );
 }
