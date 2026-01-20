@@ -6,46 +6,46 @@ import { useSession, signOut } from "next-auth/react";
 import Navbar from "@/components/auth/Navbar";
 import styles from "@/styles/Dashboard.module.css";
 
-export default function () {
-  const {data:session , status } = useSession();
+export default function Dashboard() {
+  const { data: session, status } = useSession();
   const router = useRouter();
 
+  // ✅ Correct auth guard
   useEffect(() => {
-    if (status ==="authenticated")
-      router.push("/login")
-  }, [session , status]);
+    if (status === "unauthenticated") {
+      router.replace("/login");
+    }
+  }, [status, router]);
 
-  if (status ==="loading") {
+  if (status === "loading") {
     return (
       <div className={styles.dashboard}>
-        <p>Dashboard Loding....</p>
+        <p>Dashboard Loading...</p>
       </div>
     );
   }
-  if(!session?.user) {
+
+  if (!session?.user) {
     return null;
   }
 
-  const handleLogout = async()=>{
-    await signOut({redirect:false});
+  const handleLogout = async () => {
+    await signOut({ redirect: false });
     router.replace("/login");
+  };
 
-  }
-   // Get first letter of name for the avatar
-  const userInitial = session.user.name ? session.user.name.charAt(0).toUpperCase() : "U";
+  const userInitial = session.user.name
+    ? session.user.name.charAt(0).toUpperCase()
+    : "U";
 
   return (
     <>
       <Navbar />
       <main className={styles.dashboard}>
         <div className={styles.content}>
-          {/* Avatar Circle */}
           <div className={styles.avatar}>{userInitial}</div>
-
           <h1>Welcome, {session.user.name}</h1>
-          
 
-          {/* Stats Grid added to match your CSS */}
           <div className={styles.statsGrid}>
             <div className={styles.statCard}>
               <h3>Status</h3>
