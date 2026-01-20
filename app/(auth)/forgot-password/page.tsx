@@ -1,5 +1,5 @@
 "use client"
-import ForgotPassword from "@/components/auth/ForgotPassword"
+import ForgotPasswordForm from "@/components/auth/ForgotPasswordForm"
 export default function ForgotPasswordPage() {
-  return <ForgotPassword />
+  return <ForgotPasswordForm />
 }
