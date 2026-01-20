@@ -10,7 +10,7 @@ const VerifyOtpForm = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
 
-    const type = searchParams.get("type"); // register | forgot-password
+    const type = searchParams.get("type"); 
     const emailFromParams = searchParams.get("email");
 
     const [email] = useState(emailFromParams || "");
