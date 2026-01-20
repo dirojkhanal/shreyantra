@@ -4,7 +4,7 @@
   display: flex;
   min-height: 100vh;
   width: 100%;
-  padding-top: 80px; /* Space for your fixed Navbar */
+  padding-top: 80px; 
   font-family: 'Inter', system-ui, sans-serif;
   background-color: #ffffff;
 }
@@ -22,7 +22,6 @@
   overflow: hidden;
 }
 
-/* Modern decorative element for the background */
 .leftSide::before {
   content: "";
   position: absolute;
@@ -56,7 +55,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #f8fafc; /* Lighter, cleaner background */
+  background: #f8fafc;
 }
 
 .container {
@@ -65,7 +64,6 @@
   padding: 3rem 2.5rem;
   background: white;
   border-radius: 20px;
-  /* Soft, modern shadow */
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 
               0 8px 10px -6px rgba(0, 0, 0, 0.05);
 }
@@ -91,68 +89,64 @@
   gap: 1.25rem;
 }
 
-/* --- Improved Input Fields --- */
-.input {
+/* --- Shared Input & Textarea Styling --- */
+.input, .textarea {
   width: 100%;
   padding: 0.85rem 1.1rem;
-  background-color: #ffffff; /* White background looks cleaner */
-  border: 1px solid #e2e8f0; /* Soft light border */
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
   border-radius: 10px;
   font-size: 1rem;
   color: #1e293b;
+  box-sizing: border-box; /* Ensures padding doesn't break width */
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.input::placeholder {
+.textarea {
+  min-height: 120px;
+  resize: vertical; /* Allows user to resize height only */
+}
+
+.input::placeholder, .textarea::placeholder {
   color: #94a3b8;
 }
 
-.input:hover {
-  border-color: #cbd5e1;
-}
-
-.input:focus {
+.input:focus, .textarea:focus {
   outline: none;
   border-color: #4f46e5;
   background-color: #ffffff;
-  /* Modern ring effect */
   box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
 }
 
-/* --- Password Specifics --- */
+/* --- Fixed Password Wrapper & Icon Alignment --- */
 .passwordWrapper {
   position: relative;
   width: 100%;
+  display: flex;
+  align-items: center;
 }
 
+/* Force consistent padding for ALL password fields */
 .passwordWrapper .input {
-  padding-right: 3.5rem;
+  padding-right: 3.2rem; /* Consistent space for the eye icon */
 }
 
 .eyeButton {
   position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
+  right: 0.8rem;
   background: none;
   border: none;
   color: #94a3b8;
   cursor: pointer;
   display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 4px;
-  transition: color 0.2s;
+  z-index: 10;
+  transition: color 0.2s ease;
 }
 
 .eyeButton:hover {
-  color: #4f46e5;
-}
-
-/* --- OTP Specifics --- */
-.otpInput {
-  text-align: center;
-  letter-spacing: 0.5rem;
-  font-size: 1.5rem;
-  font-weight: 700;
   color: #4f46e5;
 }
 
@@ -176,15 +170,6 @@
   transform: translateY(-1px);
 }
 
-.button:active:not(:disabled) {
-  transform: scale(0.98);
-}
-
-.button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
 .links {
   display: flex;
   justify-content: center;
@@ -194,28 +179,41 @@
   color: #64748b;
 }
 
-.links a, .resendBtn {
+.links a {
   color: #4f46e5;
   text-decoration: none;
   font-weight: 600;
-  cursor: pointer;
 }
 
-.links a:hover, .resendBtn:hover {
+.links a:hover {
   text-decoration: underline;
 }
 
-.resendBtn {
-  background: none;
-  border: none;
-  font-size: 0.9rem;
-  padding: 0;
-}
-
-/* Responsive design */
 @media (max-width: 768px) {
   .leftSide { display: none; }
   .rightSide { padding: 1rem; background: #fff; }
   .container { box-shadow: none; padding: 1.5rem; }
   .background { padding-top: 70px; }
+}
+/* --- Forgot Password Styling --- */
+
+.forgotWrapper {
+  display: flex;
+  justify-content: flex-end; /* Aligns the link to the right */
+  margin-top: 2px; /* Pulls it closer to the password input above */
+  margin-bottom: 0.5rem;
+}
+
+.forgotLink {
+  font-size: 0.85rem;
+  color: #64748b; /* Muted gray by default */
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.forgotLink:hover {
+  color: #4f46e5; /* Turns theme purple on hover */
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
