@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
@@ -10,22 +12,26 @@ export default function Dashboard() {
   const { data: session, status } = useSession();
   const router = useRouter();
 
-  // ✅ Correct auth guard
   useEffect(() => {
     if (status === "unauthenticated") {
       router.replace("/login");
     }
   }, [status, router]);
 
+  // 🔒 Wait until session is fully resolved
   if (status === "loading") {
     return (
-      <div className={styles.dashboard}>
-        <p>Dashboard Loading...</p>
-      </div>
+      <>
+        <Navbar />
+        <div className={styles.dashboard}>
+          <p>Dashboard Loading...</p>
+        </div>
+      </>
     );
   }
 
-  if (!session?.user) {
+  // Extra safety
+  if (status !== "authenticated") {
     return null;
   }
 
@@ -34,9 +40,7 @@ export default function Dashboard() {
     router.replace("/login");
   };
 
-  const userInitial = session.user.name
-    ? session.user.name.charAt(0).toUpperCase()
-    : "U";
+  const userInitial = session.user?.name?.charAt(0).toUpperCase() ?? "U";
 
   return (
     <>
@@ -44,7 +48,7 @@ export default function Dashboard() {
       <main className={styles.dashboard}>
         <div className={styles.content}>
           <div className={styles.avatar}>{userInitial}</div>
-          <h1>Welcome, {session.user.name}</h1>
+          <h1>Welcome, {session.user?.name}</h1>
 
           <div className={styles.statsGrid}>
             <div className={styles.statCard}>
@@ -53,7 +57,7 @@ export default function Dashboard() {
             </div>
             <div className={styles.statCard}>
               <h3>Email</h3>
-              <p>{session.user.email}</p>
+              <p>{session.user?.email}</p>
             </div>
           </div>
 
